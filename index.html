@@ -4,16 +4,21 @@
     <title>jQuery Mobile</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/jquery.mobile-1.2.0.css"/>
-
+    <link rel="stylesheet" href="css/jquery.mobile.iscrollview-pull.css"/>
+    <link rel="stylesheet" href="css/global.css"/>
 </head>
 <body>
-<div data-role="page">
+<div data-role="page" class="pull-demo">
 
     <div data-role="header" data-position="fixed" >
         <h1>My Title</h1>
     </div>
 
-    <div data-role="content"  data-iscroll>
+    <div data-role="content"  data-iscroll class="iscroll-wrapper">
+        <div class="iscroll-pulldown">
+            <span class="iscroll-pull-icon"></span>
+            <span class="iscroll-pull-label"></span>
+        </div>
         <ul data-role="listview">
             <li>Item 1 et sit debitis nihil</li>
             <li>Item 2 aut autem assumenda quisquam</li>
@@ -22,6 +27,10 @@
             <li>Item 5 cupiditate autem est excepturi</li>
             <li>Item 6 accusamus assumenda cumque omnis</li>
         </ul>
+        <div class="iscroll-pullup">
+            <span class="iscroll-pull-icon"></span>
+            <span class="iscroll-pull-label"></span>
+        </div>
     </div>
 
     <div data-role="footer" data-position="fixed" >
@@ -35,7 +44,20 @@
 <script type="text/javascript" src="js/jquery/jquery.mobile-1.2.0.js"></script>
 <script type="text/javascript" src="js/jquery/jquery.mobile.iscrollview.js"></script>
 <script type="text/javascript">
+    function pullDown(e,data){
+        data.iscrollview.refresh();
+    }
 
+    function pullUp(e,data){
+        data.iscrollview.refresh();
+    }
+
+    $(document).delegate("div.pull-demo","pageinit",function(e){
+        $(".iscroll-wrapper",this).bind({
+            "iscroll_onpulldown" : pullDown,
+            "iscroll_onpullup" : pullUp
+        });
+    });
 
 </script>
 </html>
